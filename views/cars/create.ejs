@@ -1,0 +1,70 @@
+<%- include('../head.ejs') %>
+
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="#">Cars</a></li>
+            <li class="breadcrumb-item"><a href="#">List Car</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add New Car</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col my-auto">
+            <h3 class="page-title">Add New Car</h3>
+        </div>
+        <div class="col text-end">
+        </div>
+    </div>
+
+    <div class="container-fluid container-form">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row row-form">
+                <div class="col-lg-2 my-auto">
+                    <label for="name">Nama <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-lg-4 ">
+                    <input class="form-control form-custom" type="text" name="name" placeholder="Avanza" id="name">
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col-lg-2 my-auto">
+                    <label for="rentPerDay">Sewa Per Hari <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-lg-4 ">
+                    <input class="form-control form-custom" type="text" name="rentPerDay" placeholder="Rp 0,-"
+                        id="rentPerDay">
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col-lg-2 my-auto">
+                    <label for="name">Ukuran <span>*</span></label>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="2" selected>Small (2 Seat)</option>
+                        <option value="4">Medium (4 Seat)</option>
+                        <option value="6">Medium (6 Seat)</option>
+                        <option value="8">Large (8 Seat)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col-lg-2 my-auto">
+                    <label for="photo">Foto <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-lg-4 ">
+                    <input name="file" class="form-control form-file" type="file" id="formFile">
+                </div>
+            </div>
+
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="row button-group ">
+            <button class="btn btn-outline-custom btn-cancel w-auto">Cancel</button>
+            <button class="btn btn-custom-primary  w-auto">Save</button>
+        </div>
+        </form>
+    </div>
+
+    <%- include('../footer.ejs') %>

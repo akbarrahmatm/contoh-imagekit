@@ -1,0 +1,123 @@
+<%- include('../head.ejs') %>
+<!-- Breadcrumb -->
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb ">
+        <li class="breadcrumb-item"><a href="#">Cars</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List Car</li>
+    </ol>
+</nav>
+
+<!-- Alert -->
+<!-- <div class="alert alert-custom alert-primary-custom text-center" role="alert">
+    A simple secondary alert—check it out!
+</div> -->
+
+<div class="row">
+    <div class="col my-auto">
+        <h3 class="page-title">List Car</h3>
+
+
+    </div>
+    <div class="col text-end">
+        <a href="/admin/cars/add" class="btn btn-custom-primary ">+ Add New Car</a>
+    </div>
+</div>
+<div class="filter-menu">
+    <ul>
+        <li>
+            <a class="btn btn-custom-filter <%= (carType === "") ? 'active' : false %>" href="/admin/cars/list">All</a>
+        </li>
+        <li>
+            <a class="btn btn-custom-filter <%= (carType === "small") ? 'active' : false %>"
+                href="/admin/cars/list?carType=small">Small</a>
+        </li>
+        <li>
+            <a class="btn btn-custom-filter <%= (carType === "medium") ? 'active' : false %>"
+                href="/admin/cars/list?carType=medium">Medium</a>
+        </li>
+        <li>
+            <a class="btn btn-custom-filter <%= (carType === "large") ? 'active' : false %>"
+                href="/admin/cars/list?carType=large">Large</a>
+        </li>
+    </ul>
+</div>
+<!-- Car Card -->
+<div class="car-card">
+    <div class="row">
+        <% if (search !== "") {  %>
+        <p>Search : <%= search %></p>
+        <%  } %>
+
+        <% if (cars.length === 0) {  %>
+        <p class="text-center">Cars Not Found.</p>
+        <%  } %>
+
+        <% cars.map((car) => { %>
+        <div class="col-lg-4">
+            <div class="card m-card">
+                <img src="/assets/img/car_image.png" class="card-img-top" alt="Car Image">
+                <div class="card-body">
+                    <h5 class="card-title"><%= car.name %></h5>
+                    <h5 class="card-subtitle">
+                        Rp <%= new Intl.NumberFormat("en-US").format(car.rentPerDay); %>
+                        / hari</h5>
+                    <h5 class="card-updated-time">
+                        <img src="/assets/img/fi_clock.svg" alt="Clock">
+                        Updated at
+                        <%- new Date(car.updatedAt).toLocaleString('en-us', {
+                            dateStyle: "medium", timeStyle: "short", hour12: false
+                        }) %>
+                    </h5>
+                    <!-- Button Group -->
+                    <div class="row button-action">
+                        <div class="col-6">
+                            <button data-bs-toggle="modal" data-bs-target="#modal<%= car.id %>"
+                                class="btn w-100 btn-outline-danger btn-outline-delete text-center" href="">
+                                <img src="/assets/img/fi_trash.svg" alt="Delete Icon">
+                                Delete
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <a class="btn w-100 btn-success btn-edit text-center" href="update.html">
+                                <img src="/assets/img/fi_edit.svg" alt="Edit Icon">
+                                Edit
+                            </a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal<%= car.id %>" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <div class="modal-body text-center">
+                                        <img class="modal-img" src="/assets/img/img_modal.png" alt="Modal image">
+                                        <h4 class="modal-title">Menghapus Data Mobil</h4>
+                                        <h5 class="modal-text">Setelah dihapus, data mobil tidak
+                                            dapat
+                                            dikembalikan. Yakin ingin menghapus?</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <form action="/admin/cars/delete/<%= car.id %>" method="post">
+                                                <button
+                                                    class="btn btn-custom-primary btn-accept w-auto mx-1">Ya</button>
+                                            </form>
+                                            <button data-bs-dismiss="modal"
+                                                class="btn btn-outline-custom btn-cancel w-auto mx-1">
+                                                Tidak
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Of Modal -->
+                    </div>
+                    <!-- End OfButton Group -->
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+
+</div>
+<!-- End Of Car Card -->
+<%- include('../footer.ejs') %>
